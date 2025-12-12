@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenneth’s Milk Tea | Lower Bicutan</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-cream': '#F6E7D7',
+                        'brand-brown': '#6B4226',
+                        'brand-teal': '#2FA8A8',
+                        'brand-dark': '#4A2C17',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        /* Active Nav State */
+        .nav-btn.active { border-bottom: 3px solid #2FA8A8; color: #2FA8A8; font-weight: 700; }
+        /* Simple Fade Animation */
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Image hover zoom effect */
+        .img-zoom-container { overflow: hidden; }
+        .img-zoom { transition: transform 0.5s ease; }
+        .group:hover .img-zoom { transform: scale(1.1); }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-10 h-10 bg-brand-brown rounded-full flex items-center justify-center text-brand-cream text-xl">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading font-bold text-xl text-brand-brown leading-tight">Kenneth’s Milk Tea</h1>
+                    <p class="text-xs text-brand-teal tracking-wide">Sip Local. Sip Happy.</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex gap-6">
+                <button onclick="navigateTo('home')" class="nav-btn active hover:text-brand-teal transition px-2 py-1" id="nav-home">Home</button>
+                <button onclick="navigateTo('about')" class="nav-btn hover:text-brand-teal transition px-2 py-1" id="nav-about">About</button>
+                <button onclick="navigateTo('products')" class="nav-btn hover:text-brand-teal transition px-2 py-1" id="nav-products">Products</button>
+                <button onclick="navigateTo('contact')" class="nav-btn hover:text-brand-teal transition px-2 py-1" id="nav-contact">Contact</button>
+            </nav>
+
+            <button class="md:hidden text-brand-brown text-2xl focus:outline-none" onclick="toggleMobileMenu()" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden bg-brand-cream md:hidden border-t border-brand-brown shadow-lg absolute w-full left-0 z-40">
+            <div class="flex flex-col p-4 space-y-2">
+                <button onclick="navigateTo('home')" class="text-left py-2 font-bold text-brand-brown border-b border-brand-brown/10">Home</button>
+                <button onclick="navigateTo('about')" class="text-left py-2 text-brand-brown border-b border-brand-brown/10">About</button>
+                <button onclick="navigateTo('products')" class="text-left py-2 text-brand-brown border-b border-brand-brown/10">Products</button>
+                <button onclick="navigateTo('contact')" class="text-left py-2 text-brand-brown">Contact</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow">
+        
+        <section id="page-home" class="page-section fade-in">
+            <div class="bg-brand-cream relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center"></div>
+                <div class="container mx-auto px-4 py-16 md:py-24 text-center relative z-10">
+                    <h2 class="font-heading text-4xl md:text-6xl font-bold text-brand-brown mb-6 drop-shadow-sm">Refresh Your Day in <br><span class="text-brand-teal">Lower Bicutan</span></h2>
+                    <p class="text-lg md:text-xl text-gray-800 mb-8 max-w-2xl mx-auto font-medium">
+                        Handcrafted milk tea made with love for our Taguig neighbors. High-quality ingredients, affordable prices, and a taste that feels like home.
+                    </p>
+                    <button onclick="navigateTo('products')" class="bg-brand-brown text-white px-8 py-3 rounded-full font-bold hover:bg-brand-dark transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        View Menu
+                    </button>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-12">
+                <h3 class="font-heading text-2xl font-bold text-center text-brand-brown mb-8 relative inline-block left-1/2 transform -translate-x-1/2 after:content-[''] after:block after:w-12 after:h-1 after:bg-brand-teal after:mx-auto after:mt-2">Crowd Favorites</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition group">
+                        <div class="h-56 overflow-hidden img-zoom-container bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1626079986386-b49ce714b9cb?auto=format&fit=crop&w=600&q=80" alt="Brown Sugar Pearl" class="w-full h-full object-cover img-zoom">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-lg text-brand-dark">Brown Sugar Pearl</h4>
+                                <span class="text-brand-teal font-bold bg-teal-50 px-2 py-1 rounded">₱95</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Rich caramelized brown sugar syrup streaks with warm, chewy tapioca pearls.</p>
+                            <button onclick="orderProduct('Brown Sugar Pearl')" class="w-full border-2 border-brand-brown text-brand-brown py-2 rounded-lg hover:bg-brand-brown hover:text-white transition font-semibold">Order Now</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition group">
+                        <div class="h-56 overflow-hidden img-zoom-container bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&w=600&q=80" alt="Classic Milk Tea" class="w-full h-full object-cover img-zoom">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-lg text-brand-dark">Classic Milk Tea</h4>
+                                <span class="text-brand-teal font-bold bg-teal-50 px-2 py-1 rounded">₱85</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">The original creamy black tea blend that started it all. Simple and perfect.</p>
+                            <button onclick="orderProduct('Classic Milk Tea')" class="w-full border-2 border-brand-brown text-brand-brown py-2 rounded-lg hover:bg-brand-brown hover:text-white transition font-semibold">Order Now</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition group">
+                        <div class="h-56 overflow-hidden img-zoom-container bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=600&q=80" alt="Matcha Latte" class="w-full h-full object-cover img-zoom">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-lg text-brand-dark">Matcha Latte</h4>
+                                <span class="text-brand-teal font-bold bg-teal-50 px-2 py-1 rounded">₱105</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Premium Japanese matcha powder blended with creamy fresh milk.</p>
+                            <button onclick="orderProduct('Matcha Latte')" class="w-full border-2 border-brand-brown text-brand-brown py-2 rounded-lg hover:bg-brand-brown hover:text-white transition font-semibold">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-about" class="page-section hidden fade-in container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-brand-cream overflow-hidden">
+                <div class="grid md:grid-cols-2">
+                    <div class="h-64 md:h-auto bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?auto=format&fit=crop&w=600&q=80" alt="Kenneth - Shop Owner" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 md:p-12">
+                        <h2 class="font-heading text-3xl font-bold text-brand-brown mb-4">Our Story</h2>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Kenneth’s Milk Tea started as a small passion project right here in Barangay Lower Bicutan. Kenneth, a milk tea enthusiast since college, realized that our local community needed a place where students and workers could relax without traveling far or spending too much.
+                        </p>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            What began as a small pop-up stall has now grown into a beloved neighborhood spot. We brew our tea fresh daily, boil our pearls to the perfect chewiness, and serve every cup with a smile.
+                        </p>
+                        
+                        <h3 class="font-heading text-lg font-bold text-brand-brown mb-3">Our Values</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fa-solid fa-leaf text-brand-teal"></i>
+                                <span>Freshness First: No day-old tea.</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fa-solid fa-users text-brand-teal"></i>
+                                <span>Community: A safe space for locals.</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fa-solid fa-peso-sign text-brand-teal"></i>
+                                <span>Affordable Luxury for everyone.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-products" class="page-section hidden fade-in container mx-auto px-4 py-12">
+            <div class="text-center mb-10">
+                <h2 class="font-heading text-3xl font-bold text-brand-brown mb-2">Our Full Menu</h2>
+                <p class="text-gray-600 mb-6">Hand-shaken happiness in every cup.</p>
+                
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button onclick="filterProducts('all')" class="filter-btn bg-brand-brown text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-sm hover:shadow">All</button>
+                    <button onclick="filterProducts('milk-tea')" class="filter-btn bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-brand-cream hover:border-brand-brown transition">Milk Tea</button>
+                    <button onclick="filterProducts('fruit-tea')" class="filter-btn bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-brand-cream hover:border-brand-brown transition">Fruit Tea</button>
+                    <button onclick="filterProducts('specials')" class="filter-btn bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-brand-cream hover:border-brand-brown transition">Specials</button>
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+        </section>
+
+        <section id="page-contact" class="page-section hidden fade-in container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="font-heading text-3xl font-bold text-brand-brown mb-6">Get in Touch</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                                <div class="bg-brand-cream p-3 rounded-full text-brand-brown"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Visit Us</h4>
+                                    <p class="text-gray-600 text-sm">Brgy. Lower Bicutan, Taguig City<br>Philippines, 1632</p>
+                                    <a href="https://maps.google.com/?q=Lower+Bicutan+Taguig" target="_blank" class="text-brand-teal text-xs font-bold uppercase tracking-wide mt-2 inline-block hover:underline">Open in Google Maps</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                                <div class="bg-brand-cream p-3 rounded-full text-brand-brown"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Call for Orders</h4>
+                                    <p class="text-gray-600 text-sm">Available 10AM - 9PM</p>
+                                    <a href="tel:+639171234567" class="text-brand-teal font-bold text-lg hover:underline block mt-1">0917-123-4567</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                                <div class="bg-brand-cream p-3 rounded-full text-brand-brown"><i class="fa-brands fa-facebook-messenger"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Chat Support</h4>
+                                    <p class="text-gray-600 text-sm mb-2">Fastest response for delivery</p>
+                                    <a href="https://m.me/placeholder" target="_blank" class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-700 inline-block transition">
+                                        Chat on Messenger
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-56 bg-gray-200 rounded-xl overflow-hidden shadow-inner relative group border border-gray-300">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Lower+Bicutan+Taguig&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            class="opacity-90 hover:opacity-100 transition duration-300">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-t-8 border-brand-teal">
+                    <h3 class="font-heading text-2xl font-bold text-gray-800 mb-6">Send Order / Inquiry</h3>
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Name</label>
+                                <input type="text" required class="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Mobile No.</label>
+                                <input type="tel" required class="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Product Interest</label>
+                            <input type="text" id="form-product" placeholder="Select a product from menu..." class="w-full bg-brand-cream/30 border border-brand-cream p-3 rounded-lg focus:outline-none focus:border-brand-teal focus:bg-white transition text-brand-brown font-semibold">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Message / Special Instructions</label>
+                            <textarea rows="4" placeholder="Sugar level? Ice level? Delivery address?" class="w-full bg-gray-50 border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-brand-teal text-white font-bold py-3.5 rounded-lg hover:bg-teal-700 transition transform active:scale-95 shadow-lg">
+                            Send Message
+                        </button>
+                        <p class="text-xs text-center text-gray-400 mt-2">No payment is collected here.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-brand-brown text-brand-cream py-10 mt-auto">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <h4 class="font-heading font-bold text-xl">Kenneth’s Milk Tea</h4>
+                </div>
+                <p class="text-sm opacity-70">Serving happiness in Taguig since 2023.</p>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-teal transition text-white">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-teal transition text-white">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-teal transition text-white">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-xs opacity-40 border-t border-white/10 pt-4">
+            © 2024 Kenneth's Milk Tea. Prototype for Demo.
+        </div>
+    </footer>
+
+    <div id="success-toast" class="fixed bottom-5 right-5 bg-teal-600 text-white px-6 py-4 rounded-lg shadow-2xl transform translate-y-32 transition-transform duration-500 z-50 flex items-center gap-4 border-l-4 border-white">
+        <div class="bg-white/20 rounded-full p-2">
+            <i class="fa-solid fa-check text-xl"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-lg">Order Sent!</h4>
+            <p class="text-sm opacity-90">We'll text you to confirm shortly.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- PRODUCT DATA WITH SPECIFIC IMAGES ---
+        const products = [
+            { 
+                name: "Classic Milk Tea", 
+                price: "₱85", 
+                cat: "milk-tea", 
+                desc: "Creamy, classic black tea blend.",
+                // Distinct milk tea image
+                img: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Wintermelon", 
+                price: "₱90", 
+                cat: "milk-tea", 
+                desc: "Sweet, caramelized wintermelon taste.",
+                // NEW: A slightly darker, creamy caramel tone milk tea
+                img: "https://images.unsplash.com/photo-1556679343-c3b52805e25d?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Taro Supreme", 
+                price: "₱95", 
+                cat: "milk-tea", 
+                desc: "Rich purple taro goodness.",
+                // Distinct purple drink
+                img: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Oreo Cheesecake", 
+                price: "₱110", 
+                cat: "specials", 
+                desc: "Thick cream cheese with oreo crumbles.",
+                // Cookies and cream look
+                img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Brown Sugar Pearl", 
+                price: "₱95", 
+                cat: "milk-tea", 
+                desc: "Tiger sugar stripes with warm boba.",
+                // NEW: Distinct tiger stripe look
+                img: "https://images.unsplash.com/photo-1626079986386-b49ce714b9cb?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Passion Fruit", 
+                price: "₱80", 
+                cat: "fruit-tea", 
+                desc: "Refreshing sweet and sour fruit tea.",
+                // Distinct orange/yellow drink
+                img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Lychee Burst", 
+                price: "₱85", 
+                cat: "fruit-tea", 
+                desc: "Fragrant lychee with nata de coco.",
+                // Clear/Pinkish light drink
+                img: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                name: "Matcha Latte", 
+                price: "₱105", 
+                cat: "specials", 
+                desc: "Premium matcha with fresh milk.",
+                // Distinct Green drink
+                img: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=400&q=80" 
+            },
+        ];
+
+        // --- RENDER PRODUCTS ---
+        const productGrid = document.getElementById('product-grid');
+        
+        function renderProducts(filter = 'all') {
+            productGrid.innerHTML = '';
+            const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+            
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-xl shadow border border-gray-100 overflow-hidden hover:shadow-lg transition flex flex-col group";
+                card.innerHTML = `
+                    <div class="h-48 bg-gray-100 overflow-hidden relative">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-bold text-gray-800 text-lg">${p.name}</h4>
+                            <span class="text-brand-teal font-bold text-sm bg-teal-50 px-2 py-0.5 rounded">${p.price}</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-4 flex-grow leading-relaxed">${p.desc}</p>
+                        <button onclick="orderProduct('${p.name}')" class="w-full bg-brand-cream text-brand-brown font-bold py-2 rounded-lg hover:bg-brand-brown hover:text-white transition text-sm flex items-center justify-center gap-2">
+                            <span>Order</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+
+            // Update filter button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                // Reset classes
+                btn.className = "filter-btn bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-full text-sm font-medium hover:bg-brand-cream hover:border-brand-brown transition";
+                
+                // Add active class if matches
+                if(btn.textContent.toLowerCase().includes(filter.replace('-', ' ')) || (filter === 'all' && btn.textContent === 'All')) {
+                    btn.className = "filter-btn bg-brand-brown text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md transform scale-105";
+                }
+            });
+        }
+
+        // --- NAVIGATION LOGIC ---
+        function navigateTo(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show active section
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            
+            // Update Nav State (Desktop)
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            // Scroll to top
+            window.scrollTo(0,0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- ORDER LOGIC ---
+        function filterProducts(category) {
+            renderProducts(category);
+        }
+
+        function orderProduct(productName) {
+            // Navigate to Contact Page
+            navigateTo('contact');
+            
+            // Pre-fill the form
+            const input = document.getElementById('form-product');
+            input.value = productName;
+            
+            // Scroll specifically to the form
+            setTimeout(() => {
+                const formSection = document.getElementById('contactForm');
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Add a highlight effect
+                input.focus();
+                input.parentElement.classList.add('animate-pulse');
+                setTimeout(() => input.parentElement.classList.remove('animate-pulse'), 1000);
+            }, 100);
+        }
+
+        // --- FORM HANDLING ---
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Reset Form
+                e.target.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+
+                // Show Success Toast
+                const toast = document.getElementById('success-toast');
+                toast.classList.remove('translate-y-32');
+                
+                // Hide Toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-y-32');
+                }, 3000);
+            }, 1500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+
+    </script>
+</body>
+</html>
